@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.context.CarbonContext;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
+import org.wso2.carbon.identity.workflow.engine.exception.WorkflowEngineException;
 import org.wso2.carbon.identity.workflow.mgt.bean.Entity;
 import org.wso2.carbon.identity.workflow.mgt.bean.Parameter;
 import org.wso2.carbon.identity.workflow.mgt.bean.Workflow;
@@ -378,14 +379,28 @@ public class WorkflowManagementServiceImpl implements WorkflowManagementService 
         abstractWorkflow.deploy(parameterList);
 
         // Add workflow to the database.
+        List<Parameter> oldParameterList = null;
         Workflow oldWorkflow = workflowDAO.getWorkflow(workflow.getWorkflowId());
         if (oldWorkflow == null) {
             workflowDAO.addWorkflow(workflow, tenantId);
         } else {
+            oldParameterList = workflowDAO.getWorkflowParams(oldWorkflow.getWorkflowId());
             workflowDAO.removeWorkflowParams(workflow.getWorkflowId());
             workflowDAO.updateWorkflow(workflow);
         }
         workflowDAO.addWorkflowParams(parameterList, workflow.getWorkflowId(), tenantId);
+
+        // Update the pending/reserved/blocked approvals that are related to the modified workflow.
+        if (oldWorkflow != null) {
+            try {
+                // Update the approval tasks.
+                WorkflowServiceDataHolder.getInstance().getApprovalTaskService()
+                        .updateApprovalTasksOnWorkflowUpdate(workflow.getWorkflowId(), parameterList, oldParameterList);
+            } catch (WorkflowEngineException e) {
+                throw new WorkflowException("Error while updating the approval tasks for the workflow: " +
+                        workflow.getWorkflowId(), e);
+            }
+        }
         for (WorkflowListener workflowListener : workflowListenerList) {
             if (workflowListener.isEnable()) {
                 workflowListener.doPostAddWorkflow(workflow, parameterList, tenantId);
@@ -1264,5 +1279,12 @@ public class WorkflowManagementServiceImpl implements WorkflowManagementService 
             throws WorkflowException {
 
         return workflowRequestDAO.retrieveWorkflow(requestId);
+    }
+
+    private void updateApprovalTasksOnWorkflowUpdate(Workflow workflow) throws InternalWorkflowException {
+
+
+
+
     }
 }
