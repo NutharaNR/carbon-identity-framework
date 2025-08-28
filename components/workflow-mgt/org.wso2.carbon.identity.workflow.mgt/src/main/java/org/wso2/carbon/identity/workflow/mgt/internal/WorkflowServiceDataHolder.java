@@ -21,7 +21,6 @@ package org.wso2.carbon.identity.workflow.mgt.internal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
-import org.wso2.carbon.identity.workflow.engine.ApprovalTaskService;
 import org.wso2.carbon.identity.workflow.mgt.WorkflowManagementService;
 import org.wso2.carbon.identity.workflow.mgt.extension.WorkflowRequestHandler;
 import org.wso2.carbon.identity.workflow.mgt.listener.WorkflowExecutorManagerListener;
@@ -55,7 +54,6 @@ public class WorkflowServiceDataHolder {
     private Map<String, Map<String, AbstractWorkflow>> workflowImpls =
             new HashMap<String, Map<String, AbstractWorkflow>>();
     private WorkflowManagementService workflowService = null;
-    private ApprovalTaskService approvalTaskService = null;
 
     private WorkflowServiceDataHolder() {
 
@@ -190,16 +188,6 @@ public class WorkflowServiceDataHolder {
     public void setWorkflowService(WorkflowManagementService workflowService) {
 
         this.workflowService = workflowService;
-    }
-
-    public void setApprovalTaskService(ApprovalTaskService approvalTaskService) {
-
-        this.approvalTaskService = approvalTaskService;
-    }
-
-    public ApprovalTaskService getApprovalTaskService() {
-
-        return approvalTaskService;
     }
 }
 

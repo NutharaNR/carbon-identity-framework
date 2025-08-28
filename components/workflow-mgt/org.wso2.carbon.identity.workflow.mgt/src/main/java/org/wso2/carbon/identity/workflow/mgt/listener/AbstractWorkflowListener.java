@@ -261,6 +261,19 @@ public abstract class AbstractWorkflowListener implements WorkflowListener {
     }
 
     /**
+     * Trigger after updating a workflow.
+     * @param workflowId      Workflow id.
+     * @param newParameterList New list of parameters.
+     * @param oldParameterList Old list of parameters.
+     * @throws WorkflowException
+     */
+    @Override
+    public void doPostAddWorkflow(String workflowId, List<Parameter> newParameterList,
+                                  List<Parameter> oldParameterList) throws WorkflowException {
+
+    }
+
+    /**
      * Trigger before retrieving a workflow.
      *
      * @param workflowId Workflow id.

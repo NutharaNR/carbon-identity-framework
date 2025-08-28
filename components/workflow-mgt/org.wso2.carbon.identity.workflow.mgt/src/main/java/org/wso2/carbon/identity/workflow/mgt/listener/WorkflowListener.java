@@ -210,6 +210,16 @@ public interface WorkflowListener {
                            List<Parameter> parameterList, int tenantId) throws WorkflowException;
 
     /**
+     * Trigger after updating a workflow.
+     * @param workflowId      Workflow id.
+     * @param newParameterList New list of parameters.
+     * @param oldParameterList Old list of parameters.
+     * @throws WorkflowException
+     */
+    void doPostAddWorkflow(String workflowId, List<Parameter> newParameterList,
+                           List<Parameter> oldParameterList) throws WorkflowException;
+
+    /**
      * Trigger before retrieving a workflow.
      *
      * @param workflowId Workflow id.

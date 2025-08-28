@@ -219,21 +219,5 @@ public class WorkflowMgtServiceComponent {
     /* Reference IdentityCoreInitializedEvent service to guarantee that this component will wait until identity core
          is started. */
     }
-
-    @Reference(
-            name = "ApprovalTaskService",
-            service = org.wso2.carbon.identity.workflow.engine.ApprovalTaskService.class,
-            cardinality = ReferenceCardinality.MANDATORY,
-            policy = ReferencePolicy.DYNAMIC,
-            unbind = "unsetApprovalTaskService")
-    protected void setApprovalTaskService(org.wso2.carbon.identity.workflow.engine.ApprovalTaskService
-                                                      approvalTaskService) {
-        WorkflowServiceDataHolder.getInstance().setApprovalTaskService(approvalTaskService);
-    }
-
-    protected void unsetApprovalTaskService(org.wso2.carbon.identity.workflow.engine.ApprovalTaskService
-                                                        approvalTaskService) {
-        WorkflowServiceDataHolder.getInstance().setApprovalTaskService(null);
-    }
 }
 
