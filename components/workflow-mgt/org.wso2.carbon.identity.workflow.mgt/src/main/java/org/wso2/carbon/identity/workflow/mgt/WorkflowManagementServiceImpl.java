@@ -1280,11 +1280,4 @@ public class WorkflowManagementServiceImpl implements WorkflowManagementService 
 
         return workflowRequestDAO.retrieveWorkflow(requestId);
     }
-
-    private void updateApprovalTasksOnWorkflowUpdate(Workflow workflow) throws InternalWorkflowException {
-
-
-
-
-    }
 }

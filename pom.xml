@@ -1901,6 +1901,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.carbon.identity.workflow</groupId>
+                <artifactId>org.wso2.carbon.identity.workflow.engine</artifactId>
+                <version>${carbon.identity.workflow.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.wso2.orbit.org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
                 <version>${commons-compress.version}</version>
@@ -2034,6 +2039,7 @@
         <identity.framework.version>${project.version}</identity.framework.version>
         <carbon.identity.package.export.version>${project.version}</carbon.identity.package.export.version>
         <carbon.identity.package.import.version.range>[5.14.0, 8.0.0)</carbon.identity.package.import.version.range>
+        <carbon.identity.workflow.version>1.0.16</carbon.identity.workflow.version>
 
         <org.bouncycastle.imp.pkg.version.range>[0.0.0,2.0.0)</org.bouncycastle.imp.pkg.version.range>
         <org.wso2.carbon.identity.organization.management.core.version>1.1.48
