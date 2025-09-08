@@ -1458,10 +1458,10 @@ public class FrameworkUtilsTest extends IdentityBaseTest {
                 throw new RuntimeException("Unexpected UserStoreException in test setup.", e);
             }
             when(realmConfiguration.getUserStoreProperty(IdentityCoreConstants.MULTI_ATTRIBUTE_SEPARATOR))
-                    .thenReturn("|");
+                    .thenReturn(IdentityCoreConstants.MULTI_ATTRIBUTE_SEPARATOR_DEFAULT);
 
             String separator = FrameworkUtils.getMultiAttributeSeparator();
-            assertEquals(separator, "|");
+            assertEquals(separator, IdentityCoreConstants.MULTI_ATTRIBUTE_SEPARATOR_DEFAULT);
         }
     }
 
